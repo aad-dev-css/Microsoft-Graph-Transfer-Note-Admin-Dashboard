@@ -7,3 +7,9 @@ export type AppProps = {
 export type LayoutProps = {
   children: JSX.Element;
 };
+
+export type WorkloadData = {
+  TargetWorkloadId: string;
+  Team: string;
+  Routing: string;
+};

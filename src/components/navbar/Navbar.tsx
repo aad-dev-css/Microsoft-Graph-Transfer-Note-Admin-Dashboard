@@ -1,14 +1,7 @@
 import "./navbar.scss";
 import { useEffect, useState } from "react";
 import { useMsal, useAccount } from "@azure/msal-react";
-import {
-  AccountInfo,
-  InteractionRequiredAuthError,
-  InteractionStatus,
-} from "@azure/msal-browser";
 import { getPhoto } from "../../utils/graphRequests";
-import { loginRequest } from "../../configs/authConfig";
-import Axios from "axios";
 
 const Navbar = () => {
   const { accounts } = useMsal();
