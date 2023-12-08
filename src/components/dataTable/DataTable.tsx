@@ -21,7 +21,6 @@ const DataTable = (dataTableProps: DataTableProps) => {
     deleteWorkload(selectedWorkload)
       .then(() => {
         setOpen(false);
-        redirect("/" + dataTableProps.slug);
       })
       .catch((e) => console.log(e));
   };

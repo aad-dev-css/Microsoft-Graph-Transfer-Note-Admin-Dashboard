@@ -2,8 +2,10 @@ import "./add.scss";
 import { useState } from "react";
 import { AddProps, WorkloadData } from "../../types/types";
 import { postWorkload } from "../../utils/workloadsRequests";
+import { useNavigate } from "react-router-dom";
 
 const Add = (addProps: AddProps) => {
+  const navigate = useNavigate();
   const [workloadData, setWorkloadData] = useState<WorkloadData>({
     TargetWorkloadId: "",
     Team: "",
@@ -15,7 +17,6 @@ const Add = (addProps: AddProps) => {
   ): void => {
     const target = event.target as HTMLButtonElement;
     if (target) {
-      console.log(target);
       setWorkloadData((prevData) => ({
         ...prevData,
         [target.name]: target.value,
@@ -25,8 +26,12 @@ const Add = (addProps: AddProps) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    postWorkload(workloadData);
-    addProps.setOpen(false);
+    postWorkload(workloadData).then((response) => {
+      if (response) {
+        addProps.setOpen(false);
+        window.location.reload();
+      }
+    });
   };
 
   return (
