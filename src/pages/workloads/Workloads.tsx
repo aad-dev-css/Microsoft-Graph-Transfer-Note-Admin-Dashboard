@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 import "./workloads.scss";
-import DataTable from "../../components/dataTable/DataTable";
-import Add from "../../components/add/Add";
 import { GridColDef } from "@mui/x-data-grid";
 import { useMsal } from "@azure/msal-react";
 import {
@@ -12,6 +10,9 @@ import {
 import CircularProgress from "@mui/material/CircularProgress";
 import { listWorkloads } from "../../utils/workloadsRequests";
 import { customApiRequest } from "../../configs/authConfig";
+import DataTable from "../../components/dataTable/DataTable";
+import Button from "@mui/material/Button";
+import Add from "../../components/add/Add";
 
 const columns: GridColDef[] = [
   {
@@ -24,7 +25,7 @@ const columns: GridColDef[] = [
     field: "Team",
     type: "string",
     headerName: "Team",
-    width: 200,
+    width: 150,
   },
   {
     field: "Routing",
@@ -61,7 +62,22 @@ const Workloads = () => {
     }
   }, []);
 
-  return <div>{loading ? <CircularProgress /> : <span>Workloads</span>}</div>;
+  return (
+    <div className="workloads">
+      <div className="info">
+        <h1>Workloads</h1>
+        <Button variant="contained" onClick={() => setOpen(true)}>
+          Add New Workload
+        </Button>
+      </div>
+      {loading ? (
+        <CircularProgress />
+      ) : (
+        <DataTable slug="workloads" columns={columns} rows={saps} />
+      )}
+      {open && <Add slug="workloads" columns={columns} setOpen={setOpen} />}
+    </div>
+  );
 };
 
 export default Workloads;
