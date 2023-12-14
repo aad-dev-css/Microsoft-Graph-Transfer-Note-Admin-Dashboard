@@ -1,6 +1,6 @@
 import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
 import "./dataTable.scss";
-import { Link, redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import { DataTableProps } from "../../types/types";
 import {
@@ -21,6 +21,7 @@ const DataTable = (dataTableProps: DataTableProps) => {
     deleteWorkload(selectedWorkload)
       .then(() => {
         setOpen(false);
+        dataTableProps.setSeed(Math.random());
       })
       .catch((e) => console.log(e));
   };

@@ -13,6 +13,7 @@ import { customApiRequest } from "../../configs/authConfig";
 import DataTable from "../../components/dataTable/DataTable";
 import Button from "@mui/material/Button";
 import Add from "../../components/add/Add";
+import { useLocation } from "react-router-dom";
 
 const columns: GridColDef[] = [
   {
@@ -37,9 +38,11 @@ const columns: GridColDef[] = [
 
 const Workloads = () => {
   const { instance, inProgress } = useMsal();
+  const location = useLocation();
   const [open, setOpen] = useState(false);
   const [saps, setSaps] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [seed, setSeed] = useState(1);
 
   useEffect(() => {
     if (inProgress === InteractionStatus.None) {
@@ -60,7 +63,7 @@ const Workloads = () => {
           }
         });
     }
-  }, []);
+  }, [location.key, seed]);
 
   return (
     <div className="workloads">
@@ -73,7 +76,12 @@ const Workloads = () => {
       {loading ? (
         <CircularProgress />
       ) : (
-        <DataTable slug="workloads" columns={columns} rows={saps} />
+        <DataTable
+          slug="workloads"
+          columns={columns}
+          rows={saps}
+          setSeed={setSeed}
+        />
       )}
       {open && <Add slug="workloads" columns={columns} setOpen={setOpen} />}
     </div>

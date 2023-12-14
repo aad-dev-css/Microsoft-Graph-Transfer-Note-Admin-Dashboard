@@ -19,6 +19,7 @@ export type DataTableProps = {
   columns: GridColDef[];
   rows: object[];
   slug: string;
+  setSeed: React.Dispatch<React.SetStateAction<number>>;
 };
 
 export type AddProps = {

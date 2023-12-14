@@ -2,10 +2,8 @@ import "./add.scss";
 import { useState } from "react";
 import { AddProps, WorkloadData } from "../../types/types";
 import { postWorkload } from "../../utils/workloadsRequests";
-import { useNavigate } from "react-router-dom";
 
 const Add = (addProps: AddProps) => {
-  const navigate = useNavigate();
   const [workloadData, setWorkloadData] = useState<WorkloadData>({
     TargetWorkloadId: "",
     Team: "",
