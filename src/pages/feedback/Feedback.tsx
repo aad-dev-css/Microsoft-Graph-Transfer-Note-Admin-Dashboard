@@ -1,4 +1,3 @@
-import React from "react";
 import "./feedback.scss";
 
 const Feedback = () => {
